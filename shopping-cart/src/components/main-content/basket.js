@@ -24,8 +24,8 @@ export class Basket extends React.Component {
     
     render () {
         return (
-            <div className="groceries-div">
-                <h1>Basket</h1>
+            <div className="basket-div">
+                <h1>Basket<img src="https://s2.svgbox.net/illlustrations.svg?ic=merry-christmas&color=000000" alt="" width="32" height="32"></img></h1>
                 <ul> 
                     {this.renderBasketItems(this.props.basketItems)}
                 </ul>

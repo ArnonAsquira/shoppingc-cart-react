@@ -77,6 +77,7 @@ class Main extends React.Component {
                     < SearchBar onClick={(e) => this.FilterSearch(e)}/>
                     < Basket onClick={(e) => this.handleBasketItems(e)} basketItems={this.state.bsaketItems}/>
                 </div>
+                <img src="https://s2.svgbox.net/illlustrations.svg?ic=angler-fish&color=000000" alt="" width="32" height="32"></img>
                 < Footer />
             </main>
         );

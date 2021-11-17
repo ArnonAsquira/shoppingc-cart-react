@@ -2,18 +2,25 @@ import React from "react";
 import { groceries } from "./groceries";
 
 
-export class Basket extends React.Component {
+export class Groceries extends React.Component {
     constructor(props) {
         super(props);
         this.groceris = groceries;
     }
     
+    createCartItem () {
+       const listItems =  this.groceris.map (item => {
+           return <li key={item}>{item}</li>
+       })
+       return listItems;
+    }
+    
     render () {
         return (
             <div className="groceries-div">
-                <h1>Basket</h1>
+                <h1>groceries</h1>
                 <ul>
-                    {this.props.basketItems}
+                    {this.createCartItem()}
                 </ul>
             </div>
         )

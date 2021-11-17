@@ -9,13 +9,33 @@ class Main extends React.Component {
     constructor(props) {
         super (props);
         this.state = {
-            bsaketItems: 0,
+            bsaketItems: {},
 
         }
     }
 
     addItemToBasket(e) {
-        console.log(e.target.getAttribute('name'));
+        const item = e.target.getAttribute('name');
+        const newBasketItems = this.state.bsaketItems;
+        if (!newBasketItems[item]) {
+            newBasketItems[item] = 1;
+        } else {
+            newBasketItems[item] ++;
+        }
+        this.setState({bsaketItems: newBasketItems});
+    }
+
+    handleBasketItems(e) {
+        if (e.target.className === 'decrement-button'){
+            const item = e.target.getAttribute('name');
+            const newBasketItems = this.state.bsaketItems;
+            if (newBasketItems[item] === 1) {
+                newBasketItems[item] = 0;
+            } else {
+                newBasketItems[item] --;
+            }
+            this.setState({bsaketItems: newBasketItems});
+        }
     }
 
     render() {
@@ -24,7 +44,7 @@ class Main extends React.Component {
                 < Header />
                 <div className="content-lists">
                 < Groceries onClick={(e) => this.addItemToBasket(e)} />
-                < Basket onClick={() => this.handleBasketItems}/>
+                < Basket onClick={(e) => this.handleBasketItems(e)} basketItems={this.state.bsaketItems}/>
                 </div>
             </main>
         );

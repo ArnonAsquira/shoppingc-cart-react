@@ -28,4 +28,14 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+
+.content-lists ul {
+  list-style: none;
+}
+
+.content-lists ul li {
+  border: 1px solid black;
+  margin: 1px;
+  cursor: pointer;
+}
 /*# sourceMappingURL=main.css.map */

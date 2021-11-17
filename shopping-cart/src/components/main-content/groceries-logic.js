@@ -10,7 +10,7 @@ export class Groceries extends React.Component {
     
     createCartItem () {
        const listItems =  this.groceris.map (item => {
-           return <li key={item}>{item}</li>
+           return <li key={item} name={item} onClick={(e) => this.props.onClick(e)}>{item}</li>
        })
        return listItems;
     }

@@ -35,18 +35,33 @@ class Main extends React.Component {
         this.setState({bsaketItems: newBasketItems});
         this.saveToLocalStorage(this.state);
     }
-    // remove a single item from cart
+    
+    // handle delete buttons in basket list
     handleBasketItems(e) {
-        if (!e.target.className === 'decrement-button') return;
-            const item = e.target.getAttribute('name');
-            const newBasketItems = this.state.bsaketItems;
-            if (newBasketItems[item] === 1) {
-                newBasketItems[item] = 0;
-            } else {
-                newBasketItems[item] --;
-            }
-            this.setState({bsaketItems: newBasketItems});
-            this.saveToLocalStorage(this.state);
+        const item = e.target.getAttribute('name');
+        const newBasketItems = this.state.bsaketItems;
+        if (e.target.className === 'decrement-button') {
+            this.decrementOneItem(item, newBasketItems);
+        } else if (e.target.className === 'delete-item-button') {
+            this.deleteBaksetItem(item, newBasketItems);
+        }
+        this.saveToLocalStorage(this.state);
+    }
+
+    // decrement one from item count
+    decrementOneItem(item, basketObj) {
+        if (basketObj[item] === 1) {
+            basketObj[item] = 0;
+        } else {
+            basketObj[item] --;
+        }
+        this.setState({bsaketItems: basketObj});
+    }
+    
+    // delete the item from the basket
+    deleteBaksetItem(item, basketObj) {
+        basketObj[item] = 0;
+        this.setState({bsaketItems: basketObj});
     }
     
     // search bar function

@@ -12,11 +12,16 @@ export class Basket extends React.Component {
         const basketItemsArray = [];
         for (let property in basketItems) {
             if (basketItems[property] <= 0) continue;
-            basketItemsArray.push(<li key={property} 
+            basketItemsArray.push(
+                <li key={property} 
                 onClick={(e) => this.props.onClick(e)}>
                 {`${property}: ${basketItems[property]}`}
-                <button className='decrement-button' name={property}>-
-                </button>
+                   <button 
+                   className='decrement-button' name={property}>-
+                   </button>
+                   <button 
+                   className='delete-item-button' name={property}>X
+                   </button>
                 </li>)
         }
         return(basketItemsArray);

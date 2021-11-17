@@ -7,13 +7,22 @@ import { Basket } from './components/main-content/basket';
 import { SearchBar } from './components/main-content/serachBar';
 import { Footer } from './components/footer';
 
+if (!localStorage.cartItems) {
+    localStorage.setItem('cartItems', JSON.stringify({}));
+}
+
 class Main extends React.Component {
     constructor(props) {
         super (props);
         this.state = {
-            bsaketItems: {},
+            bsaketItems: JSON.parse(localStorage.cartItems).bsaketItems || JSON.parse(localStorage.cartItems),
         }
     }
+
+    saveToLocalStorage(currentState) {
+        localStorage.setItem('cartItems', JSON.stringify(currentState.bsaketItems));
+    }
+    
     // add item function 
     addItemToBasket(e) {
         const item = e.target.getAttribute('name');
@@ -24,10 +33,11 @@ class Main extends React.Component {
             newBasketItems[item] ++;
         }
         this.setState({bsaketItems: newBasketItems});
+        this.saveToLocalStorage(this.state);
     }
     // remove a single item from cart
     handleBasketItems(e) {
-        if (e.target.className === 'decrement-button'){
+        if (!e.target.className === 'decrement-button') return;
             const item = e.target.getAttribute('name');
             const newBasketItems = this.state.bsaketItems;
             if (newBasketItems[item] === 1) {
@@ -36,7 +46,7 @@ class Main extends React.Component {
                 newBasketItems[item] --;
             }
             this.setState({bsaketItems: newBasketItems});
-        }
+            this.saveToLocalStorage(this.state);
     }
     
     // search bar function
